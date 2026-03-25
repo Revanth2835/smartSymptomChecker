@@ -1,10 +1,14 @@
 export const analyzeSymptoms = (symptomIds) => {
-  // Helper: check if ALL required symptom IDs are selected
+  // Helpers
+  const has = (id) => symptomIds.includes(id);
   const hasAll = (required) => required.every((id) => symptomIds.includes(id));
+  const hasAny = (symptoms) => symptoms.some((id) => symptomIds.includes(id));
+  const countIn = (list) => list.filter(id => symptomIds.includes(id)).length;
 
-  // ─── HIGH SEVERITY ─────────────────────────────────────────────────────────
-
-  if (hasAll(['sym_ChestPain', 'sym_ShortnessOfBreath'])) {
+  // ─── STAGE 1: CRITICAL EMERGENCIES (HIGH PRIORITY) ──────────────────────────
+  
+  // Heart/Emergency Symptoms - Even a single one is High Priority
+  if (has('sym_ChestPain') || has('sym_ShortnessOfBreath')) {
     return {
       conditionKey: 'cond_HeartIssue',
       conditionName: 'Heart Issue',
@@ -18,7 +22,8 @@ export const analyzeSymptoms = (symptomIds) => {
     };
   }
 
-  if (hasAll(['sym_SevereWeakness', 'sym_Dizziness'])) {
+  // Other High Severity Signs (Immediate Medical Attention)
+  if (hasAny(['sym_Confusion', 'sym_Seizures', 'sym_SevereWeakness', 'sym_Dizziness'])) {
     return {
       conditionKey: 'cond_SeriousCondition',
       conditionName: 'Serious Condition',
@@ -32,8 +37,9 @@ export const analyzeSymptoms = (symptomIds) => {
     };
   }
 
-  // ─── MEDIUM SEVERITY ───────────────────────────────────────────────────────
+  // ─── STAGE 2: SPECIFIC CONDITION MATCHES (MEDIUM PRIORITY) ─────────────────
 
+  // Flu: Classic set
   if (hasAll(['sym_Fever', 'sym_Cough', 'sym_SoreThroat'])) {
     return {
       conditionKey: 'cond_Flu',
@@ -48,7 +54,8 @@ export const analyzeSymptoms = (symptomIds) => {
     };
   }
 
-  if (hasAll(['sym_Vomiting', 'sym_Diarrhea'])) {
+  // Food Poisoning: Digestive distress
+  if (hasAll(['sym_Vomiting', 'sym_Diarrhea']) || (has('sym_StomachPain') && hasAny(['sym_Vomiting', 'sym_Diarrhea']))) {
     return {
       conditionKey: 'cond_FoodPoisoning',
       conditionName: 'Food Poisoning',
@@ -62,12 +69,11 @@ export const analyzeSymptoms = (symptomIds) => {
     };
   }
 
+  // Infection: General infectious markers
   if (hasAll(['sym_Fever', 'sym_Chills', 'sym_Sweating'])) {
     return {
       conditionKey: 'cond_Infection',
-      conditionName: 'Serious Condition', // Mapping to Serious Condition based on user's Map if needed, or keep Infection? User's map didn't have Infection. Wait, user's conditionMap has "Serious Condition". 
-      // User's map: Flu, Food Poisoning, Heart Issue, Serious Condition, Migraine, General illness. 
-      // I'll map 'cond_Infection' and 'cond_Allergy' to 'Serious Condition' or 'General illness' to fit their map, or just use 'Serious Condition' for Infection.
+      conditionName: 'Infection',
       severity: 'Medium',
       severityLevel: 'Medium',
       guidance: {
@@ -78,32 +84,82 @@ export const analyzeSymptoms = (symptomIds) => {
     };
   }
 
-  if (hasAll(['sym_SkinRash', 'sym_Fever'])) {
-    return {
-      conditionKey: 'cond_Allergy',
-      conditionName: 'General illness',
-      severity: 'Medium',
-      severityLevel: 'Medium',
-      guidance: {
-        summaryKey: 'summ_Allergy',
-        stepsKey: 'steps_Allergy',
-        warningKey: 'warn_Allergy',
-      },
-    };
-  }
-
-  // ─── LOW SEVERITY ──────────────────────────────────────────────────────────
-
-  if (hasAll(['sym_Headache', 'sym_BlurredVision'])) {
+  // Migraine: Specific Neurological
+  if (has('sym_Headache') && hasAny(['sym_BlurredVision', 'sym_Nausea'])) {
     return {
       conditionKey: 'cond_Migraine',
       conditionName: 'Migraine',
-      severity: 'Low',
-      severityLevel: 'Low',
+      severity: 'Medium',
+      severityLevel: 'Medium',
       guidance: {
         summaryKey: 'summ_Migraine',
         stepsKey: 'steps_Migraine',
         warningKey: 'warn_Migraine',
+      },
+    };
+  }
+
+  // ─── STAGE 3: CATEGORY CLUSTERS ─────────────────────────────────────────────
+
+  // Respiratory Cluster
+  const respiratoryList = ['sym_Cough', 'sym_SoreThroat', 'sym_RunnyNose', 'sym_ChestCongestion', 'sym_Wheezing'];
+  if (countIn(respiratoryList) >= 2 || has('sym_Cough')) {
+    return {
+      conditionKey: 'cond_RespiratoryIssue',
+      conditionName: 'Respiratory Issue',
+      severity: 'Medium',
+      severityLevel: 'Medium',
+      guidance: {
+        summaryKey: 'summ_RespiratoryIssue',
+        stepsKey: 'steps_RespiratoryIssue',
+        warningKey: 'warn_RespiratoryIssue',
+      },
+    };
+  }
+
+  // Digestive Cluster
+  const digestiveList = ['sym_StomachPain', 'sym_Vomiting', 'sym_Diarrhea', 'sym_Nausea', 'sym_Bloating'];
+  if (countIn(digestiveList) >= 2 || hasAny(['sym_StomachPain', 'sym_Vomiting', 'sym_Diarrhea'])) {
+    return {
+      conditionKey: 'cond_DigestiveIssue',
+      conditionName: 'Digestive Issue',
+      severity: 'Medium',
+      severityLevel: 'Medium',
+      guidance: {
+        summaryKey: 'summ_DigestiveIssue',
+        stepsKey: 'steps_DigestiveIssue',
+        warningKey: 'warn_DigestiveIssue',
+      },
+    };
+  }
+
+  // Neurological Cluster
+  const neuroList = ['sym_Headache', 'sym_BlurredVision', 'sym_Numbness'];
+  if (countIn(neuroList) >= 2 || has('sym_Headache')) {
+    return {
+      conditionKey: 'cond_NeurologicalIssue',
+      conditionName: 'Neurological Issue',
+      severity: 'Low',
+      severityLevel: 'Low',
+      guidance: {
+        summaryKey: 'summ_NeurologicalIssue',
+        stepsKey: 'steps_NeurologicalIssue',
+        warningKey: 'warn_NeurologicalIssue',
+      },
+    };
+  }
+
+  // Skin/Urinary Cluster
+  if (hasAny(['sym_SkinRash', 'sym_BurningUrination', 'sym_WoundInfection'])) {
+    return {
+      conditionKey: 'cond_SkinUrinary',
+      conditionName: 'Skin/Urinary Issue',
+      severity: 'Low',
+      severityLevel: 'Low',
+      guidance: {
+        summaryKey: 'summ_SkinUrinary',
+        stepsKey: 'steps_SkinUrinary',
+        warningKey: 'warn_SkinUrinary',
       },
     };
   }

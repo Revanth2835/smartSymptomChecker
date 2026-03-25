@@ -14,7 +14,12 @@ export const conditionMap = {
   "Heart Issue": "గుండె సమస్య",
   "Serious Condition": "తీవ్రమైన పరిస్థితి",
   "Migraine": "మైగ్రేన్",
-  "General illness": "సాధారణ అనారోగ్యం"
+  "General illness": "సాధారణ అనారోగ్యం",
+  "Infection": "ఇన్ఫెక్షన్",
+  "Respiratory Issue": "శ్వాసకోశ సమస్య",
+  "Digestive Issue": "జీర్ణ సంబంధిత సమస్య",
+  "Neurological Issue": "నరాల సంబంధిత సమస్య",
+  "Skin/Urinary Issue": "చర్మం/మూత్రనాళ సమస్య"
 };
 
 export const severityMap = {
@@ -205,6 +210,50 @@ export const text = {
       "Eat nutritious, home-cooked food.",
       "Monitor your symptoms over the next 24–48 hours.",
       "If any symptoms worsen or new ones appear, consult a doctor."
+    ],
+
+    cond_RespiratoryIssue: "Respiratory Issue",
+    summ_RespiratoryIssue: "Your symptoms suggest a respiratory irritation or mild infection.",
+    warn_RespiratoryIssue: "Seek medical help if you experience chest pain, high fever, or severe cough for more than 3 days.",
+    steps_RespiratoryIssue: [
+      "Drink warm fluids like herbal tea or warm water.",
+      "Rest your voice and avoid smoking or dusty areas.",
+      "Steam inhalation can help clear congestion.",
+      "Monitor your temperature regularly.",
+      "Consult a doctor if breathing becomes even slightly difficult."
+    ],
+
+    cond_DigestiveIssue: "Digestive Issue",
+    summ_DigestiveIssue: "You are experiencing symptoms related to your digestive system.",
+    warn_DigestiveIssue: "Consult a doctor if you have severe abdominal pain, persistent vomiting, or signs of dehydration.",
+    steps_DigestiveIssue: [
+      "Stick to a bland diet (Rice, Bananas, Toast).",
+      "Avoid spicy, oily, or dairy-heavy foods for now.",
+      "Drink small sips of water or ORS to stay hydrated.",
+      "Rest your stomach for a few hours if you feel nauseous.",
+      "Keep track of bowel movements and any changes."
+    ],
+
+    cond_NeurologicalIssue: "Neurological/Headache Issue",
+    summ_NeurologicalIssue: "Headache or neurological symptoms need careful monitoring.",
+    warn_NeurologicalIssue: "Seek IMMEDIATE emergency care if you experience sudden confusion, fainting, or severe vision changes.",
+    steps_NeurologicalIssue: [
+      "Rest in a quiet, dark room.",
+      "Avoid bright screens (mobile/TV) and loud noises.",
+      "Check your blood pressure if possible.",
+      "Stay hydrated and try to maintain a regular sleep schedule.",
+      "Consult a doctor if the headache is different from your usual pattern."
+    ],
+
+    cond_SkinUrinary: "Skin/Urinary Irritation",
+    summ_SkinUrinary: "You have symptoms related to skin or urinary tract irritation.",
+    warn_SkinUrinary: "See a doctor if you have a high fever, severe pain, or if the rash spreads rapidly.",
+    steps_SkinUrinary: [
+      "Drink plenty of water to flush your system.",
+      "Avoid using harsh soaps or chemicals on the affected area.",
+      "Wear loose, cotton clothing.",
+      "Do not self-medicate with creams or antibiotics without advice.",
+      "Note when the symptoms started and any potential triggers."
     ]
   },
   te: {
@@ -388,6 +437,50 @@ export const text = {
       "పోషకమైన, ఇంట్లో వండిన ఆహారాన్ని తినండి.",
       "తదుపరి 24-48 గంటల పాటు మీ లక్షణాలను గమనించండి.",
       "ఏవైనా లక్షణాలు అధ్వాన్నంగా మారితే లేదా కొత్తవి కనిపిస్తే, డాక్టర్ను సంప్రదించండి."
+    ],
+
+    cond_RespiratoryIssue: "శ్వాసకోశ సమస్య",
+    summ_RespiratoryIssue: "మీ లక్షణాలు శ్వాసకోశ చికాకు లేదా తేలికపాటి ఇన్ఫెక్షన్ను సూచిస్తున్నాయి.",
+    warn_RespiratoryIssue: "మీకు ఛాతీ నొప్పి, అధిక జ్వరం లేదా 3 రోజుల కంటే ఎక్కువ కాలం తీవ్రమైన దగ్గు ఉంటే వైద్య సహాయం పొందండి.",
+    steps_RespiratoryIssue: [
+      "హెర్బల్ టీ లేదా వెచ్చని నీరు వంటి వెచ్చని ద్రవాలను తాగండి.",
+      "ధూమపానం లేదా దుమ్ము ఉన్న ప్రాంతాలకు దూరంగా ఉండండి.",
+      "ఆవిరి పట్టడం వల్ల ఉపశమనం లభిస్తుంది.",
+      "మీ శరీర ఉష్ణోగ్రతను క్రమం తప్పకుండా గమనించండి.",
+      "శ్వాస తీసుకోవడం కొంచెం కష్టమైనా డాక్టర్ను సంప్రదించండి."
+    ],
+
+    cond_DigestiveIssue: "జీర్ణ సంబంధిత సమస్య",
+    summ_DigestiveIssue: "మీరు మీ జీర్ణవ్యవస్థకు సంబంధించిన లక్షణాలను అనుభవిస్తున్నారు.",
+    warn_DigestiveIssue: "మీకు తీవ్రమైన కడుపు నొప్పి, నిరంతర వాంతులు లేదా డీహైడ్రేషన్ లక్షణాలు ఉంటే డాక్టర్ను సంప్రదించండి.",
+    steps_DigestiveIssue: [
+      "తేలికపాటి ఆహారం (అన్నం, అరటిపండు) తీసుకోండి.",
+      "ప్రస్తుతానికి కారం, నూనె లేదా పాల పదార్థాలను నివారించండి.",
+      "హైడ్రేటెడ్గా ఉండటానికి కొద్దికొద్దిగా నీరు లేదా ఓఆర్ఎస్ తాగండి.",
+      "వికారం అనిపిస్తే మీ కడుపుకు కొన్ని గంటల పాటు విశ్రాంతినివ్వండి.",
+      "విరేచనాల సంఖ్య మరియు మార్పులను గమనించండి."
+    ],
+
+    cond_NeurologicalIssue: "నరాల సంబంధిత సమస్య / తలనొప్పి",
+    summ_NeurologicalIssue: "తలనొప్పి లేదా నరాల సంబంధిత లక్షణాలను జాగ్రత్తగా గమనించాలి.",
+    warn_NeurologicalIssue: "మీకు హఠాత్తుగా గందరగోళం, స్పృహ తప్పడం లేదా తీవ్రమైన దృష్టి మార్పులు ఉంటే వెంటనే అత్యవసర సంరక్షణ పొందండి.",
+    steps_NeurologicalIssue: [
+      "ప్రశాంతమైన, చీకటి గదిలో విశ్రాంతి తీసుకోండి.",
+      "ప్రకాశవంతమైన స్క్రీన్లు (మొబైల్/టీవీ) మరియు పెద్ద శబ్దాలను నివారించండి.",
+      "వీలైతే మీ రక్తపోటును (BP) తనిఖీ చేయండి.",
+      "హైడ్రేటెడ్గా ఉండండి మరియు క్రమబద్ధమైన నిద్రను కొనసాగించండి.",
+      "తలనొప్పి మీ సాధారణ నమూనా కంటే భిన్నంగా ఉంటే డాక్టర్ను సంప్రదించండి."
+    ],
+
+    cond_SkinUrinary: "చర్మం / మూత్రనాళ చికాకు",
+    summ_SkinUrinary: "మీరు చర్మం లేదా మూత్రనాళ చికాకుకు సంబంధించిన లక్షణాలను కలిగి ఉన్నారు.",
+    warn_SkinUrinary: "మీకు అధిక జ్వరం, తీవ్రమైన నొప్పి ఉన్నా లేదా దద్దుర్లు వేగంగా వ్యాప్తి చెందుతున్నా డాక్టర్ను చూడండి.",
+    steps_SkinUrinary: [
+      "ప్రేగులు మరియు మూత్రనాళం క్లీన్ అవ్వడానికి పుష్కలంగా నీరు తాగండి.",
+      "ప్రభావిత ప్రాంతంలో ఘటైన సబ్బులు లేదా రసాయనాలను వాడకండి.",
+      "వదులుగా ఉండే కాటన్ దుస్తులను ధరించండి.",
+      "సలహా లేకుండా క్రీములు లేదా యాంటీబయాటిక్స్ వాడకండి.",
+      "లక్షణాలు ఎప్పుడు ప్రారంభమయ్యాయో మరియు దేనివల్ల వచ్చాయో గమనించండి."
     ]
   }
 };
