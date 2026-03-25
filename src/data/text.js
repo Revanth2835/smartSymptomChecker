@@ -31,6 +31,11 @@ export const text = {
     cta: "Analyze Symptoms Now",
     checkSymptoms: "Check Symptoms",
     takesTime: "Takes less than 30 seconds",
+    emergencyTitle: "Emergency Help",
+    ambulance: "Ambulance",
+    healthHelpline: "Health Helpline",
+    womenHelpline: "Women Helpline",
+    callAmbulance: "Call Ambulance (108)",
     
     // Header
     appName: "Smart Symptom Checker",
@@ -208,7 +213,12 @@ export const text = {
     subtitle: "ఎటువంటి వైద్య పరిభాష లేకుండా మీ లక్షణాల ఆధారంగా వెంటనే ఆరోగ్య సూచనలు పొందండి.",
     cta: "లక్షణాలను విశ్లేషించండి",
     checkSymptoms: "లక్షణాలు తనిఖీ చేయండి",
-    takesTime: "30 సెకన్లలో పూర్తవుతుంది",
+    takesTime: "30 సెకన్ల కంటే తక్కువ సమయం పడుతుంది",
+    emergencyTitle: "అత్యవసర సహాయం",
+    ambulance: "అంబులెన్స్",
+    healthHelpline: "ఆరోగ్య హెల్ప్‌లైన్",
+    womenHelpline: "మహిళా హెల్ప్‌లైన్",
+    callAmbulance: "అంబులెన్స్‌కు కాల్ చేయండి (108)",
     
     // Header
     appName: "స్మార్ట్ లక్షణాల తనిఖీ",
