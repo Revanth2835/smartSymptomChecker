@@ -39,6 +39,7 @@ const Results = () => {
   const [position, setPosition] = useState(null);
   const [loadingLocation, setLoadingLocation] = useState(true);
   const [locationError, setLocationError] = useState("");
+  const [isOffline, setIsOffline] = useState(!navigator.onLine);
 
   const symptoms = location.state?.symptoms || [];
   const analysis = symptoms.length > 0 ? analyzeSymptoms(symptoms) : null;
@@ -50,6 +51,20 @@ const Results = () => {
       setIsLoading(false);
     }, 1500);
     return () => clearTimeout(timer);
+  }, []);
+
+  // Offline detection
+  useEffect(() => {
+    const handleOnline = () => setIsOffline(false);
+    const handleOffline = () => setIsOffline(true);
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
   }, []);
 
   // 1. SAFE STATE MANAGEMENT & 5. PREVENT CRASH GLUE
@@ -264,30 +279,38 @@ const Results = () => {
                 ) : position ? (
                   <div className="space-y-6 sm:space-y-8">
                     {/* 3. MAP RENDER (SAFE) */}
-                    <div className="rounded-2xl overflow-hidden border border-gray-200 h-[280px] sm:h-[450px] w-full z-0 relative shadow-md">
-                      <MapContainer 
-                        center={position} 
-                        zoom={13} 
-                        style={{ height: '100%', width: '100%', zIndex: 0 }}
-                      >
-                        <TileLayer
-                          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        />
-                        
-                        {/* User Location Marker */}
-                        <Marker position={position} icon={userIcon}>
-                          <Popup>{t.yourLocation || "You are here"}</Popup>
-                        </Marker>
-                        
-                        {/* Hospital Markers */}
-                        {mockHospitals.map(hospital => (
-                          <Marker key={hospital.id} position={[hospital.lat, hospital.lng]}>
-                            <Popup className="font-semibold">{hospital.name} ({hospital.distance})</Popup>
+                    {isOffline ? (
+                      <div className="bg-yellow-50 text-yellow-700 p-8 rounded-2xl border border-yellow-100 flex flex-col items-center justify-center text-center shadow-sm h-[280px] sm:h-[450px]">
+                        <AlertTriangle className="w-10 h-10 mb-4 text-yellow-600 animate-pulse" />
+                        <p className="font-bold text-lg sm:text-xl mb-2">{t.mapOffline}</p>
+                        <p className="text-sm opacity-80">Please check your internet connection to view nearby hospitals on the map.</p>
+                      </div>
+                    ) : (
+                      <div className="rounded-2xl overflow-hidden border border-gray-200 h-[280px] sm:h-[450px] w-full z-0 relative shadow-md">
+                        <MapContainer 
+                          center={position} 
+                          zoom={13} 
+                          style={{ height: '100%', width: '100%', zIndex: 0 }}
+                        >
+                          <TileLayer
+                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                          />
+                          
+                          {/* User Location Marker */}
+                          <Marker position={position} icon={userIcon}>
+                            <Popup>{t.yourLocation || "You are here"}</Popup>
                           </Marker>
-                        ))}
-                      </MapContainer>
-                    </div>
+                          
+                          {/* Hospital Markers */}
+                          {mockHospitals.map(hospital => (
+                            <Marker key={hospital.id} position={[hospital.lat, hospital.lng]}>
+                              <Popup className="font-semibold">{hospital.name} ({hospital.distance})</Popup>
+                            </Marker>
+                          ))}
+                        </MapContainer>
+                      </div>
+                    )}
 
                     {/* Hospital List */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5">

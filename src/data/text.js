@@ -111,6 +111,7 @@ export const text = {
     pleaseCheckAgain: "Please check your symptoms again.",
     disclaimerTitle: "Disclaimer",
     disclaimerText: "This is not a medical diagnosis. Consult a doctor or medical professional immediately in emergencies.",
+    mapOffline: "Map is not available in offline mode",
     
     // Severities
     sev_Low: "Low",
@@ -338,6 +339,7 @@ export const text = {
     pleaseCheckAgain: "దయచేసి మీ లక్షణాలను మళ్లీ తనిఖీ చేయండి.",
     disclaimerTitle: "నిరాకరణ",
     disclaimerText: "ఇది వైద్య నిర్ధారణ కాదు. అత్యవసర పరిస్థితుల్లో వెంటనే డాక్టర్ లేదా వైద్య నిపుణులను సంప్రదించండి.",
+    mapOffline: "ఆఫ్‌లైన్ మోడ్‌లో మ్యాప్ అందుబాటులో లేదు",
     
     // Severities
     sev_Low: "తక్కువ",
