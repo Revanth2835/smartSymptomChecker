@@ -6,7 +6,7 @@ import { text } from '../data/text';
 
 const Header = ({ showButton = true }) => {
   const navigate = useNavigate();
-  const { language, toggleLanguage } = useLanguage();
+  const { language, toggleLanguage, changeLanguage } = useLanguage();
   const t = text[language];
 
   return (
@@ -21,15 +21,22 @@ const Header = ({ showButton = true }) => {
           </span>
         </Link>
         
-        <div className="flex items-center space-x-1 sm:space-x-4 flex-shrink-0">
-          <button 
-            onClick={toggleLanguage}
-            className="flex items-center space-x-1.5 px-2 sm:px-3 py-1.5 rounded-lg border border-gray-200 hover:bg-gray-50 text-gray-600 transition-colors text-xs sm:text-sm font-semibold whitespace-nowrap"
-            aria-label="Toggle Language"
-          >
-            <Languages className="w-3.5 h-3.5 sm:w-4 h-4 text-blue-500" />
-            <span>{language === 'en' ? 'తెలుగు' : 'EN'}</span>
-          </button>
+        <div className="flex items-center space-x-3 sm:space-x-6 flex-shrink-0">
+          <div className="flex items-center space-x-2 sm:space-x-3 text-xs sm:text-sm font-medium">
+            <button 
+              onClick={() => changeLanguage('en')}
+              className={`transition-all duration-200 uppercase tracking-wide ${language === 'en' ? 'text-gray-900 font-bold border-b-2 border-gray-900 pb-0.5' : 'text-gray-400 hover:text-gray-600'}`}
+            >
+              EN
+            </button>
+            <span className="text-gray-200 font-light">|</span>
+            <button 
+              onClick={() => changeLanguage('te')}
+              className={`transition-all duration-200 ${language === 'te' ? 'text-gray-900 font-bold border-b-2 border-gray-900 pb-0.5' : 'text-gray-400 hover:text-gray-600'}`}
+            >
+              తెలుగు
+            </button>
+          </div>
 
           {showButton && (
             <button 

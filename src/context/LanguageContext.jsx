@@ -16,8 +16,13 @@ export const LanguageProvider = ({ children }) => {
     });
   };
 
+  const changeLanguage = (lang) => {
+    setLanguage(lang);
+    localStorage.setItem('appLanguage', lang);
+  };
+
   return (
-    <LanguageContext.Provider value={{ language, toggleLanguage }}>
+    <LanguageContext.Provider value={{ language, toggleLanguage, changeLanguage }}>
       {children}
     </LanguageContext.Provider>
   );
