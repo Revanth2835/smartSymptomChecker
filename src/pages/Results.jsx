@@ -219,7 +219,7 @@ const Results = () => {
               <div className="mb-2 bg-gray-50 rounded-2xl p-5 sm:p-8 border border-gray-100 shadow-sm">
                 <h3 className="text-sm sm:text-base font-bold text-gray-900 mb-4 flex items-center">
                   <List className="w-5 h-5 text-blue-500 mr-2" />
-                  {t.symEvaluated}
+                  {t.symptomsEvaluated}
                 </h3>
                 <div className="flex flex-wrap gap-2 sm:gap-3">
                   {symptoms.map(symId => {

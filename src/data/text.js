@@ -31,7 +31,7 @@ export const severityMap = {
 export const text = {
   en: {
     // Landing Page
-    title: "Smart Symptom Checker",
+    title: "Smart Symptom, Checker",
     subtitle: "Get instant health insights based on your symptoms without any medical jargon.",
     cta: "Analyze Symptoms Now",
     checkSymptoms: "Check Symptoms",
@@ -258,7 +258,7 @@ export const text = {
   },
   te: {
     // Landing Page
-    title: "స్మార్ట్ లక్షణాల తనిఖీ",
+    title: "స్మార్ట్ లక్షణాల, తనిఖీ",
     subtitle: "ఎటువంటి వైద్య పరిభాష లేకుండా మీ లక్షణాల ఆధారంగా వెంటనే ఆరోగ్య సూచనలు పొందండి.",
     cta: "లక్షణాలను విశ్లేషించండి",
     checkSymptoms: "లక్షణాలు తనిఖీ చేయండి",
